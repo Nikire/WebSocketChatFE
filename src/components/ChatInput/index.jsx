@@ -1,17 +1,28 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import socket from '../../socket';
 export default function ChatInput() {
+  const [text, setText] = useState('');
+  function changeHandler(e) {
+    setText(e.target.value);
+  }
+  function sendHandler() {
+    socket.emit('message', text);
+    setText('');
+  }
   return (
     <div class="d-flex gap-2">
       <input
+        onChange={changeHandler}
         type="text"
         class="form-control w-70"
+        value={text}
         placeholder="Type your message here..."
         aria-label="Chat message"
         aria-describedby="send-button"
       />
       <div class="input-group-append">
         <button
+          onClick={sendHandler}
           class="btn btn-primary btn-circle mr-1"
           type="button"
           id="send-button"

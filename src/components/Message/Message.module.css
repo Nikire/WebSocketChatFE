@@ -1,0 +1,14 @@
+.message {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  border-radius: 5px;
+  max-width: 90%;
+  background-color: #fefefe;
+  border: 1px solid #aeaeae;
+  color: #000;
+}
+
+.messageContent {
+  margin: 0px 0px 0px 5px;
+}

@@ -5,16 +5,17 @@ export default function ChatInput() {
   function changeHandler(e) {
     setText(e.target.value);
   }
-  function sendHandler() {
+  function sendHandler(e) {
+    e.preventDefault();
     socket.emit('message', text);
     setText('');
   }
   return (
-    <div class="d-flex gap-2">
+    <form class="d-flex gap-2">
       <input
         onChange={changeHandler}
         type="text"
-        class="form-control w-70"
+        class="form-control shadow-none w-70"
         value={text}
         placeholder="Type your message here..."
         aria-label="Chat message"
@@ -24,12 +25,12 @@ export default function ChatInput() {
         <button
           onClick={sendHandler}
           class="btn btn-primary btn-circle mr-1"
-          type="button"
+          type="submit"
           id="send-button"
         >
           <i class="bi bi-send h5 m-0"></i>
         </button>
       </div>
-    </div>
+    </form>
   );
 }

@@ -16,10 +16,7 @@ export default function Chat() {
   });
 
   return (
-    <div
-      ref={containerRef}
-      class="chatBox d-flex flex-column justify-content-between gap-3 "
-    >
+    <div class="chatBox d-flex flex-column justify-content-between gap-3 ">
       <div
         className="d-flex flex-column align-items-start gap-3 overflow-auto"
         style={{ wordWrap: 'break-word' }}

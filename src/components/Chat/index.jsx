@@ -4,10 +4,10 @@ import ChatInput from '../ChatInput';
 import socket from '../../socket';
 export default function Chat() {
   let [messages, setMessages] = useState([]);
-  const containerRef = useRef(null);
+  const lastMessageRef = useRef(null);
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
 
@@ -24,9 +24,15 @@ export default function Chat() {
         className="d-flex flex-column align-items-start gap-3 overflow-auto"
         style={{ wordWrap: 'break-word' }}
       >
-        {messages.reverse().map((message, i) => (
-          <Message msg={message} key={i} />
-        ))}
+        {messages
+          .reverse()
+          .map((message, i) =>
+            i === messages.length - 1 ? (
+              <Message msg={message} ref={lastMessageRef} key={i} />
+            ) : (
+              <Message msg={message} key={i} />
+            )
+          )}
       </div>
       <div className="d-flex flex-column gap-2">
         <hr />

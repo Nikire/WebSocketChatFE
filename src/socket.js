@@ -1,7 +1,6 @@
 import { io } from 'socket.io-client';
-import env from './config.js';
 
-const socket = io(env.origin);
+const socket = io(process.env.REACT_APP_ORIGIN);
 
 socket.on('connect', () => {
   console.log('Connected:' + socket.id);

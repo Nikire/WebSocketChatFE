@@ -3,9 +3,9 @@
   align-items: center;
   min-width: 83px;
   padding: 10px;
-  word-wrap: break-word;
-  border-radius: 0px 15px 15px 15px;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
+  border-radius: 0px 15px 15px 15px;
   min-height: 40px;
   max-width: 90%;
   background-color: #fefefe;
@@ -15,5 +15,5 @@
 }
 
 .messageContent {
-  margin: 0px 0px 0px 5px;
+  margin: 0px 5px 0px 5px;
 }

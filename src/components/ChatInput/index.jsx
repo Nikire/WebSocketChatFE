@@ -11,24 +11,24 @@ export default function ChatInput() {
     setText('');
   }
   return (
-    <form class="d-flex gap-2">
+    <form className="d-flex gap-2">
       <input
         onChange={changeHandler}
         type="text"
-        class="form-control shadow-none w-70"
+        className="form-control shadow-none w-70"
         value={text}
         placeholder="Type your message here..."
         aria-label="Chat message"
         aria-describedby="send-button"
       />
-      <div class="input-group-append">
+      <div className="input-group-append">
         <button
           onClick={sendHandler}
-          class="btn btn-primary btn-circle mr-1"
+          className="btn btn-primary btn-circle mr-1"
           type="submit"
           id="send-button"
         >
-          <i class="bi bi-send h5 m-0"></i>
+          <i className="bi bi-send h5 m-0"></i>
         </button>
       </div>
     </form>

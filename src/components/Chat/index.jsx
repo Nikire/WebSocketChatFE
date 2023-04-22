@@ -21,15 +21,15 @@ export default function Chat() {
         className="d-flex flex-column align-items-start gap-3 overflow-auto"
         style={{ wordWrap: 'break-word' }}
       >
-        {messages
-          .reverse()
-          .map((message, i) =>
-            i === messages.length - 1 ? (
-              <Message msg={message} ref={lastMessageRef} key={i} />
-            ) : (
+        {messages.reverse().map((message, i) =>
+          i === messages.length - 1 ? (
+            <div ref={lastMessageRef}>
               <Message msg={message} key={i} />
-            )
-          )}
+            </div>
+          ) : (
+            <Message msg={message} key={i} />
+          )
+        )}
       </div>
       <div className="d-flex flex-column gap-2">
         <hr />

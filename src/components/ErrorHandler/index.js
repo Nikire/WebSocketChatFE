@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
-import { loginFailure, registerFailure } from '../redux/actions';
+import { loginFailure, registerFailure } from '../../redux/actions';
 
 const ErrorHandler = () => {
   const error = useSelector((state) => state.error);

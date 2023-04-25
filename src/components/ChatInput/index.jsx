@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import socket from '../../socket';
+import { useSelector } from 'react-redux';
 export default function ChatInput() {
   const [text, setText] = useState('');
+  const username = useSelector((state) => state.user?.username);
   function changeHandler(e) {
     setText(e.target.value);
   }
   function sendHandler(e) {
     e.preventDefault();
-    socket.emit('message', text);
+    socket.emit('message', {
+      username,
+      text,
+      hour: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }),
+    });
     setText('');
   }
   return (

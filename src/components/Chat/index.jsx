@@ -11,8 +11,8 @@ export default function Chat() {
     }
   }, [messages]);
 
-  socket.on('message-fe', (text, type) => {
-    setMessages([...messages, { text, type }]);
+  socket.on('message-fe', (message) => {
+    setMessages([...messages, message]);
   });
 
   return (
@@ -21,11 +21,11 @@ export default function Chat() {
         {messages.reverse().map((message, i) =>
           i === messages.length - 1 ? (
             <div className="d-flex w-100" ref={lastMessageRef} key={i}>
-              <Message text={message.text} type={message.type} />
+              <Message message={message} />
             </div>
           ) : (
             <React.Fragment key={i}>
-              <Message text={message.text} type={message.type} />
+              <Message message={message} />
             </React.Fragment>
           )
         )}

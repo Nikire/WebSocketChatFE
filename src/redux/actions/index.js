@@ -43,7 +43,10 @@ export const loginRequest = () => ({
 });
 
 export const loginSuccess = (user) => {
-  socket.emit('message', `${user.username} has connected`, 'status');
+  socket.emit('message', {
+    text: `${user.username} has connected`,
+    type: 'status',
+  });
 
   return {
     type: LOGIN_SUCCESS,
@@ -61,7 +64,10 @@ export const registerRequest = () => ({
 });
 
 export const registerSuccess = (user) => {
-  socket.emit('message', `${user.username} has connected`, 'status');
+  socket.emit('message', {
+    text: `${user.username} has connected`,
+    type: 'status',
+  });
 
   return {
     type: REGISTER_SUCCESS,

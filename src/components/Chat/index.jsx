@@ -4,14 +4,15 @@ import socket from '../../socket';
 export default function Chat() {
   let [messages, setMessages] = useState([]);
   const lastMessageRef = useRef(null);
+
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
 
-  socket.on('message-fe', (newMessage) => {
-    setMessages([...messages, newMessage]);
+  socket.on('message-fe', (text, type) => {
+    setMessages([...messages, { text, type }]);
   });
 
   return (
@@ -19,13 +20,13 @@ export default function Chat() {
       <div className="d-flex flex-column align-items-start gap-3">
         {messages.reverse().map((message, i) =>
           i === messages.length - 1 ? (
-            <div className="bubble-container" ref={lastMessageRef} key={i}>
-              <Message msg={message} />
+            <div className="d-flex w-100" ref={lastMessageRef} key={i}>
+              <Message text={message.text} type={message.type} />
             </div>
           ) : (
-            <div className="bubble-container" key={i}>
-              <Message msg={message} />
-            </div>
+            <React.Fragment key={i}>
+              <Message text={message.text} type={message.type} />
+            </React.Fragment>
           )
         )}
       </div>

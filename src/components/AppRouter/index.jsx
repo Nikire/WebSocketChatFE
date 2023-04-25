@@ -17,7 +17,7 @@ export default function AppRouter() {
         <Route
           path="/"
           element={
-            <UserRoutes>
+            <UserRoutes force>
               <ChatPage />
             </UserRoutes>
           }

@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginRegisterText from '../components/LoginRegisterText';
 import { registerUser } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerUser(username, password));
+    dispatch(registerUser(username, password, name, email, navigate));
   };
 
   return (
@@ -18,6 +21,20 @@ export default function Register() {
       <form onSubmit={handleSubmit}>
         <h4 className="mb-4 text-muted">REGISTER</h4>
         <div className="mb-4">
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              <span>Email</span>
+            </label>
+            <input
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              type="text"
+              placeholder="email"
+              className="form-control"
+              id="email"
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               <span>Username</span>
@@ -30,6 +47,20 @@ export default function Register() {
               placeholder="Username"
               className="form-control"
               id="username"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              <span>Name</span>
+            </label>
+            <input
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              type="text"
+              placeholder="name"
+              className="form-control"
+              id="name"
             />
           </div>
           <div className="mb-3">

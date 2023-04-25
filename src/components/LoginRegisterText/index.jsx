@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoginRegisterText(props) {
   const [type, setType] = useState('');
@@ -16,9 +17,9 @@ export default function LoginRegisterText(props) {
   return (
     <small className="text-muted">
       <span className="m-2">{question}</span>
-      <a className="text-muted" href={`/${type}`}>
+      <Link className="text-muted" to={`/${type}`}>
         {type}
-      </a>
+      </Link>
     </small>
   );
 }

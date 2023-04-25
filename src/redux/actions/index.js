@@ -9,37 +9,47 @@ import {
 } from '../actionTypes';
 
 import { login, register } from '../../services/auth.service';
-
+import { getUserInfo } from '../../services/users.service';
+import socket from '../../socket';
 // ...
 
-export const loginUser = (username, password) => async (dispatch) => {
+export const loginUser = (username, password, navigate) => async (dispatch) => {
   dispatch(loginRequest());
   try {
-    const user = await login(username, password);
-    dispatch(loginSuccess(user));
+    const loginResponse = await login(username, password);
+    const user = await getUserInfo(loginResponse.accessToken);
+    await dispatch(loginSuccess(user));
+    navigate('/');
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
 };
 
-export const registerUser = (username, password) => async (dispatch) => {
-  dispatch(registerRequest());
-  try {
-    const user = await register(username, password);
-    dispatch(registerSuccess(user));
-  } catch (error) {
-    dispatch(registerFailure(error.message));
-  }
-};
+export const registerUser =
+  (username, password, name, email, navigate) => async (dispatch) => {
+    dispatch(registerRequest());
+    try {
+      const registerResponse = await register(username, password, name, email);
+      const user = await getUserInfo(registerResponse.accessToken);
+      await dispatch(registerSuccess(user));
+      navigate('/');
+    } catch (error) {
+      dispatch(registerFailure(error.message));
+    }
+  };
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-export const loginSuccess = (user) => ({
-  type: LOGIN_SUCCESS,
-  payload: user,
-});
+export const loginSuccess = (user) => {
+  socket.emit('message', `${user.username} has connected`, 'status');
+
+  return {
+    type: LOGIN_SUCCESS,
+    payload: user,
+  };
+};
 
 export const loginFailure = (error) => ({
   type: LOGIN_FAILURE,
@@ -50,10 +60,14 @@ export const registerRequest = () => ({
   type: REGISTER_REQUEST,
 });
 
-export const registerSuccess = (user) => ({
-  type: REGISTER_SUCCESS,
-  payload: user,
-});
+export const registerSuccess = (user) => {
+  socket.emit('message', `${user.username} has connected`, 'status');
+
+  return {
+    type: REGISTER_SUCCESS,
+    payload: user,
+  };
+};
 
 export const registerFailure = (error) => ({
   type: REGISTER_FAILURE,

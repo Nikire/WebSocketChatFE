@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import socket from '../../socket';
 
 /**
  * A component that requires authentication to access its children.
@@ -14,12 +15,13 @@ import { useNavigate } from 'react-router-dom';
 const UserRoutes = ({ children, force = false }) => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const token = useSelector((state) => state.user?.token);
+  const username = useSelector((state) => state.user?.username);
   const sessionToken = localStorage.getItem('sessionToken');
   const navigate = useNavigate();
 
   useEffect(() => {
     if (force) {
-      if (!isAuthenticated || !token || token !== sessionToken) {
+      if (!isAuthenticated) {
         navigate('/login');
       }
     }

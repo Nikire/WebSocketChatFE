@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import socket from '../../socket';
 import { useSelector } from 'react-redux';
+import { sendMessage } from '../../services/messages.service';
 export default function ChatInput() {
   const [text, setText] = useState('');
   const username = useSelector((state) => state.user?.username);
@@ -18,6 +19,7 @@ export default function ChatInput() {
         hour12: true,
       }),
     });
+    sendMessage(text);
     setText('');
   }
   return (

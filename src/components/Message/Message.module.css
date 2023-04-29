@@ -1,12 +1,9 @@
 .message {
   display: flex;
   align-items: center;
-  min-width: 83px;
   padding: 10px;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  word-break: break-all;
   border-radius: 0px 15px 15px 15px;
-  min-height: 40px;
   max-width: 90%;
   background-color: #fefefe;
   border: 1px solid #aeaeae;
@@ -16,4 +13,11 @@
 
 .messageContent {
   margin: 0px 5px 0px 5px;
+}
+
+.yourMessage{
+  flex-direction: row-reverse;
+  border-radius: 15px 0px 15px 15px;
+  background-color: var(--bs-blue);
+  color:white;
 }

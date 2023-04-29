@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Message from '../Message';
 import socket from '../../socket';
 import { useSelector } from 'react-redux';
+import s from '../Message/Message.module.css';
 export default function Chat() {
+  const user = useSelector(state=>state.user)
   let messages = useSelector((state) => state.messages);
   let loading = useSelector((state) => state.loading);
   let [messagesLocal, setMessagesLocal] = useState([]);
@@ -28,15 +30,16 @@ export default function Chat() {
   ) : (
     <div className="chatBox-container d-flex flex-column justify-content-between gap-3 ">
       <div className="d-flex flex-column align-items-start gap-3">
+
         {messagesLocal?.reverse().map((message, i) =>
           i === messagesLocal.length - 1 ? (
-            <div className="d-flex w-100" ref={lastMessageRef} key={i}>
-              <Message message={message} />
+            <div key={i} className={`d-flex w-100 flex-column ${message.username == user.username ? "align-items-end" : 'align-items-start'}`} ref={lastMessageRef} key={i}>
+              <Message message={message} user={user}/>
             </div>
           ) : (
-            <React.Fragment key={i}>
-              <Message message={message} />
-            </React.Fragment>
+            <div key={i} className={`d-flex w-100 flex-column ${message.username == user.username ? "align-items-end" : 'align-items-start'}`}>
+              <Message message={message} user={user}/>
+            </div>
           )
         )}
       </div>

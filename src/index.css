@@ -20,6 +20,9 @@
   border: 1px solid #aeaeae;
   border-radius: 5px;
 }
+.chatBox-container::-webkit-scrollbar {
+  display: none;
+}
 
 @media (max-width: 767px) {
   .chatBox {

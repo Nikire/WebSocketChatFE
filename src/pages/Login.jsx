@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import LoginRegisterText from '../components/LoginRegisterText';
+import LoginRegisterText from '@C/LoginRegisterText';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/actions';
+import { loginUser } from '@/redux/actions';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -11,6 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(process.env.REACT_APP_ORIGIN)
     dispatch(loginUser(username, password, navigate));
   };
 

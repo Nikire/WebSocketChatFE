@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import socket from '../../socket';
+import socket from '@/socket';
 
 /**
  * A component that requires authentication to access its children.

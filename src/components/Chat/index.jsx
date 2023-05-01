@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Message from '../Message';
-import socket from '../../socket';
+import Message from '@C/Message';
+import socket from '@/socket';
 import { useSelector } from 'react-redux';
-import s from '../Message/Message.module.css';
+
 export default function Chat() {
   const user = useSelector(state=>state.user)
   let messages = useSelector((state) => state.messages);
@@ -11,7 +11,6 @@ export default function Chat() {
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    console.log('LOCO!', messages, messagesLocal);
     setMessagesLocal(...messagesLocal, messages);
   }, [messages]);
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function Chat() {
   }, [messagesLocal]);
 
   socket.on('message-fe', (message) => {
-    console.log('LOCO! LOCAL', messagesLocal);
     setMessagesLocal([...messagesLocal, message]);
   });
 

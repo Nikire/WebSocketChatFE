@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import socket from '../../socket';
+import socket from '@/socket';
 import { useSelector } from 'react-redux';
-import { sendMessage } from '../../services/messages.service';
+import { sendMessage } from '@/services/messages.service';
 export default function ChatInput() {
   const [text, setText] = useState('');
   const username = useSelector((state) => state.user?.username);

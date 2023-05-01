@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import LoginRegisterText from '../components/LoginRegisterText';
-import { registerUser } from '../redux/actions';
+import LoginRegisterText from '@C/LoginRegisterText';
+import { registerUser } from '@/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ export default function Register() {
               type="text"
               placeholder="email"
               className="form-control"
-              id="email"
+              id="email" required
             />
           </div>
           <div className="mb-3">
@@ -46,7 +46,7 @@ export default function Register() {
               type="text"
               placeholder="Username"
               className="form-control"
-              id="username"
+              id="username" required
             />
           </div>
           <div className="mb-3">
@@ -60,7 +60,7 @@ export default function Register() {
               type="text"
               placeholder="name"
               className="form-control"
-              id="name"
+              id="name" required
             />
           </div>
           <div className="mb-3">
@@ -74,7 +74,7 @@ export default function Register() {
               type="password"
               placeholder="Password"
               className="form-control"
-              id="password"
+              id="password" required
             />
           </div>
         </div>

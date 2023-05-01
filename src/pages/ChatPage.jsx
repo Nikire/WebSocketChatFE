@@ -1,6 +1,6 @@
 import React from 'react';
-import Chat from '../components/Chat';
-import ChatInput from '../components/ChatInput';
+import Chat from '@C/Chat';
+import ChatInput from '@C/ChatInput';
 
 export default function ChatPage() {
   return (

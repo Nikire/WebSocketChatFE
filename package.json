@@ -6,6 +6,7 @@
   "author": "erikpastuszek@gmail.com <erikpastuszek@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "serve": "webpack serve --mode production",
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },

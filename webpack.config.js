@@ -2,11 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 require('dotenv').config();
+
 module.exports = {
+  mode: 'production',
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {
@@ -35,6 +39,10 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -44,9 +52,5 @@ module.exports = {
       'process.env.REACT_APP_ORIGIN': JSON.stringify(process.env.REACT_APP_ORIGIN),
     }),
   ],
-  devServer: {
-    static: path.join(__dirname, 'build'),
-    port: 3000,
-    open: true,
-  },
+  devtool: 'source-map',
 };

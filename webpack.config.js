@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   resolve: {
     alias: {
@@ -45,7 +45,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'build'),
     port: 3000,
     open: true,
   },

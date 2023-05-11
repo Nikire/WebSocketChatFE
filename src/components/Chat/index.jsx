@@ -30,7 +30,7 @@ export default function Chat() {
       <div className="d-flex flex-column align-items-start gap-3">
 
       {messagesLocal.map((message, i) =>
-          i === 0 ? (
+          i === messagesLocal.length - 1 ? (
             <div key={i} className={`d-flex w-100 flex-column ${message.username == user.username ? "align-items-end" : 'align-items-start'}`} ref={lastMessageRef} key={i}>
               <Message message={message} user={user}/>
             </div>

@@ -6,7 +6,7 @@
   "author": "erikpastuszek@gmail.com <erikpastuszek@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "start": "webpack serve --mode development --open",
     "start:prod": "yarn build && serve -s build"
   },
@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "mini-css-extract-plugin": "^2.7.5",
     "serve": "^14.2.0"
   }
 }

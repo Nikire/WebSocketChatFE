@@ -4,6 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isProduction = process.env.NODE_ENV === 'production';
 require('dotenv').config();
 
 module.exports = {
@@ -35,7 +37,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+        ],
       },
     ],
   },
@@ -51,6 +56,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.REACT_APP_ORIGIN': JSON.stringify(process.env.REACT_APP_ORIGIN),
     }),
+    isProduction && new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
   ],
   devtool: 'source-map',
 };

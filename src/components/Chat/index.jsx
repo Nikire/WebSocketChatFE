@@ -27,7 +27,7 @@ export default function Chat() {
     <div>Loading</div>
   ) : (
     <div className="chatBox-container d-flex flex-column justify-content-between gap-3 ">
-      <div className="d-flex flex-column-reverse align-items-start gap-3">
+      <div className="d-flex flex-column align-items-start gap-3">
 
       {messagesLocal.map((message, i) =>
           i === 0 ? (

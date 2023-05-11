@@ -11,7 +11,7 @@ export default function Chat() {
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    setMessagesLocal(...messagesLocal, messages);
+    setMessagesLocal([...messagesLocal, ...messages.reverse()]);
   }, [messages]);
   useEffect(() => {
     if (lastMessageRef.current) {

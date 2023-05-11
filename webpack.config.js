@@ -57,6 +57,6 @@ module.exports = {
       'process.env.REACT_APP_ORIGIN': JSON.stringify(process.env.REACT_APP_ORIGIN),
     }),
     isProduction && new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-  ],
+  ].filter(Boolean),
   devtool: 'source-map',
 };

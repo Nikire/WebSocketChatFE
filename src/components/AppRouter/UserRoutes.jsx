@@ -14,7 +14,6 @@ import socket from '@/socket';
  **/
 const UserRoutes = ({ children, force = false }) => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
-  const sessionToken = localStorage.getItem('sessionToken');
   const navigate = useNavigate();
   //TODO handle sessionToken
   useEffect(() => {
@@ -23,7 +22,7 @@ const UserRoutes = ({ children, force = false }) => {
         navigate('/login');
       }
     }
-  }, [isAuthenticated, sessionToken]);
+  }, [isAuthenticated]);
 
   return <>{children}</>;
 };

@@ -13,6 +13,7 @@ import {
 import { login, register } from '../../services/auth.service';
 import { getUserInfo } from '../../services/users.service';
 import socket from '../../socket';
+import Cookies from 'js-cookie';
 import { getAllMessages } from '../../services/messages.service';
 // ...
 export const messagesGet = () => async (dispatch) => {
@@ -40,11 +41,12 @@ export const messageSuccess = (messages) => {
   };
 };
 export const loginUser = (username, password, navigate) => async (dispatch) => {
+  console.log('loginUser called');
   dispatch(loginRequest());
   try {
     const loginResponse = await login(username, password);
     const user = await getUserInfo(loginResponse.accessToken);
-    localStorage.setItem('sessionToken', loginResponse.accessToken);
+    Cookies.set('sessionToken', loginResponse.accessToken, { expires: 7 });
     await dispatch(messagesGet());
     await dispatch(loginSuccess(user));
     navigate('/');
@@ -59,7 +61,7 @@ export const registerUser =
     try {
       const registerResponse = await register(username, password, name, email);
       const user = await getUserInfo(registerResponse.accessToken);
-      localStorage.setItem('sessionToken', registerResponse.accessToken);
+      Cookies.set('sessionToken', registerResponse.accessToken, { expires: 7 });
       await dispatch(messagesGet());
       await dispatch(registerSuccess(user));
       navigate('/');
@@ -72,7 +74,7 @@ export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-export const loginSuccess = (user, accessToken) => {
+export const loginSuccess = (user) => {
   socket.emit('message', {
     text: `${user.username} has connected`,
     type: 'status',
@@ -92,7 +94,7 @@ export const registerRequest = () => ({
   type: REGISTER_REQUEST,
 });
 
-export const registerSuccess = (user, accessToken) => {
+export const registerSuccess = (user) => {
   socket.emit('message', {
     text: `${user.username} has connected`,
     type: 'status',
@@ -109,8 +111,15 @@ export const registerFailure = (error) => ({
 });
 
 export const logout = () => {
-  localStorage.clear('sessionToken');
+  Cookies.remove('sessionToken');
   return {
     type: LOGOUT,
   };
+};
+
+export const loadUserRequest = () => async (dispatch) => {
+  console.log('loadUserRequest called');
+  let token = Cookies.get('sessionToken');
+  const user = await getUserInfo(token);
+  dispatch(loginSuccess(user));
 };

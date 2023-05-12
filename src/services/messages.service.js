@@ -1,8 +1,9 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 const { REACT_APP_ORIGIN } = process.env;
 
 export const getAllMessages = async () => {
-  const accessToken = localStorage.getItem('sessionToken');
+  const accessToken = Cookies.get('sessionToken');
   const response = await axios.get(`${REACT_APP_ORIGIN}/messages/`, {
     headers: { Authorization: 'Bearer ' + accessToken },
   });
@@ -10,7 +11,7 @@ export const getAllMessages = async () => {
 };
 
 export const sendMessage = async (text) => {
-  const accessToken = localStorage.getItem('sessionToken');
+  const accessToken = Cookies.get('sessionToken');
   const response = await axios.post(
     `${REACT_APP_ORIGIN}/messages/`,
     { text },

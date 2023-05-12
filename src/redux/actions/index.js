@@ -41,7 +41,6 @@ export const messageSuccess = (messages) => {
   };
 };
 export const loginUser = (username, password, navigate) => async (dispatch) => {
-  console.log('loginUser called');
   dispatch(loginRequest());
   try {
     const loginResponse = await login(username, password);
@@ -118,8 +117,8 @@ export const logout = () => {
 };
 
 export const loadUserRequest = () => async (dispatch) => {
-  console.log('loadUserRequest called');
   let token = Cookies.get('sessionToken');
+  await dispatch(messagesGet());
   const user = await getUserInfo(token);
   dispatch(loginSuccess(user));
 };

@@ -17,7 +17,6 @@ export default function AppRouter() {
   const dispatch = useDispatch();
 
   useEffect(() => { 
-    console.log('AppRouter useEffect called');
     const token = Cookies.get('sessionToken');
     if (token) {
       dispatch(loadUserRequest());

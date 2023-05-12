@@ -118,7 +118,7 @@ export const logout = () => {
 
 export const loadUserRequest = () => async (dispatch) => {
   let token = Cookies.get('sessionToken');
-  await dispatch(messagesGet());
   const user = await getUserInfo(token);
+  await dispatch(messagesGet());
   dispatch(loginSuccess(user));
 };

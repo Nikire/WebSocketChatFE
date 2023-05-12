@@ -31,7 +31,7 @@ export default function Chat() {
 
       {messagesLocal.map((message, i) =>
           i === messagesLocal.length - 1 ? (
-            <div key={i} className={`d-flex w-100 flex-column ${message.username == user.username ? "align-items-end" : 'align-items-start'}`} ref={lastMessageRef} key={i}>
+            <div key={i} className={`d-flex w-100 flex-column ${message.username == user.username ? "align-items-end" : 'align-items-start'}`} ref={lastMessageRef} >
               <Message message={message} user={user}/>
             </div>
           ) : (

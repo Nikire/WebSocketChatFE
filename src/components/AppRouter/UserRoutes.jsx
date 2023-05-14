@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 const UserRoutes = ({ children, force = false }) => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const navigate = useNavigate();
-  //TODO handle sessionToken
   useEffect(() => {
     if (force) {
       if (!isAuthenticated) {
